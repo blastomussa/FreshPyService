@@ -331,6 +331,7 @@ class FreshPy(object):
     def lastUser2usedBy_staff(self, asset, requester_list):
         asset_id = asset['display_id']
         last_login = str(asset['type_fields']['last_login_by_17000000908'])
+        if(asset['type_fields']['last_login_by_17000000908']==None): return
         for requester in requester_list:
             requester_name = str(requester['first_name']) + str(requester['last_name'])
             if(last_login.lower()==requester_name.lower()):
@@ -345,6 +346,7 @@ class FreshPy(object):
     def lastUser2usedBy_students(self, asset, requester_list):
         asset_id = asset['display_id']
         last_login = str(asset['type_fields']['last_login_by_17000000908'])
+        if(asset['type_fields']['last_login_by_17000000908']==None): return
         for requester in requester_list:
             requester_email = str(requester['primary_email'])
             if(last_login.lower()==requester_email.lower()):
