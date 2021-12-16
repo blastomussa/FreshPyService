@@ -4,7 +4,7 @@
 # Date 12/16/2021
 # Example use case of FreshPy.py
 # Put FreshPy.py in same directory as script to import
-from FreshPy import FreshPy
+from FreshPy import *
 
 # Initiates FreshPy class. Downloads all assets and filters for "Laptop" product type.
 # Downloads all requesters from a specific requester group and then assigns assets to
