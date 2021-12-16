@@ -319,7 +319,7 @@ class FreshPy(object):
     # arg:
     # return:
     def list_asset_types(self):
-        uri = self.root_uri + '/asset_types'
+        uri = self.root_uri + '/asset_types?per_page=100'
         response = self._get(uri)
         return response.json()['asset_types']
 
@@ -330,10 +330,10 @@ class FreshPy(object):
     # Last user is AzureAD user(FirstnameLastname) and requesters are synced from Google
     def lastUser2usedBy_staff(self, asset, requester_list):
         asset_id = asset['display_id']
-        last_login = asset['type_fields']['last_login_by_17000000908']
+        last_login = str(asset['type_fields']['last_login_by_17000000908'])
         for requester in requester_list:
             requester_name = str(requester['first_name']) + str(requester['last_name'])
-            if(str(last_login).lower()==requester_name.lower()):
+            if(last_login.lower()==requester_name.lower()):
                 data = {'user_id': int(requester['id'])}
                 response = self.update_asset(asset_id,data)
                 print(response)
@@ -342,12 +342,12 @@ class FreshPy(object):
     # NOT TESTED NEEDS TO BE REWORKED
     # needs to match email for google synced requesters to Chromebook last sign in email
     # last_login_by field needs to be updated if run on different freshservice domain
-    def lastUser2usedBy_students(asset,requester_list):
+    def lastUser2usedBy_students(self, asset, requester_list):
         asset_id = asset['display_id']
-        last_login = asset['type_fields']['last_login_by_17000000908']
+        last_login = str(asset['type_fields']['last_login_by_17000000908'])
         for requester in requester_list:
             requester_email = str(requester['primary_email'])
-            if(str(last_login).lower()==requester_email.lower()):
+            if(last_login.lower()==requester_email.lower()):
                 data = {'user_id': int(requester['id'])}
                 response = self.update_asset(asset_id,data)
                 print(response)
