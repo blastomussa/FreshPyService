@@ -233,6 +233,22 @@ class FreshPy(object):
         uri = self.root_uri + '/agents/' + str(agent_id)
         response = self._put(uri, data)
         return response.json()['agent']
+    
+    
+    # arg:
+    # return:
+    def deactivate_agent(self, agent_id):
+        uri = self.root_uri + '/agents/' + str(agent_id)
+        response = self._delete(uri)
+        return response.json()
+    
+    
+    # arg:
+    # return:
+    def forget_agent(self, agent_id):
+        uri = self.root_uri + '/agents/' + str(agent_id) + '/forget'
+        response = self._delete(uri)
+        return response.json()
 
 
     #------------------- Requester Group Calls -------------------#
