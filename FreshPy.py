@@ -165,6 +165,14 @@ class FreshPy(object):
             requesters = requesters + r
             next_page = self._paginate(response)
         return requesters
+    
+    
+    # arg:
+    # return:
+    def requester_fields(self):
+        uri = self.root_uri + '/requester_fields'
+        response = self._get(uri)
+        return response.json()['requester_fields']
 
 
     # arg:
@@ -191,6 +199,30 @@ class FreshPy(object):
         uri = self.root_uri + '/requesters/' + str(requester_id) + '/forget'
         response = self._delete(uri, data)
         return response.json()
+    
+    
+    # arg:
+    # return:
+    def requester2agent(self,requester_id):
+        uri = self.root_uri + '/requesters/' + str(requester_id) + '/convert_to_agent'
+        response = self._put(uri,None)
+        return response.json()['agent']
+    
+    
+    # arg:
+    # return:
+    def merge_requesters(self,requester_id, secondary_id):
+        uri = self.root_uri + '/requesters/'+ str(requester_id) + '/merge?secondary_requesters=' + str(secondary_id)
+        response = self._put(uri,None)
+        return response.json()['requester']
+    
+    
+    # arg:
+    # return:
+    def reactivate_requesters(self,requester_id):
+        uri = self.root_uri + '/requesters/'+ str(requester_id) + '/reactivate'
+        response = self._put(uri,None)
+        return response.json()['requester']
 
 
     #------------------- Agents Calls -------------------#
@@ -249,6 +281,31 @@ class FreshPy(object):
         uri = self.root_uri + '/agents/' + str(agent_id) + '/forget'
         response = self._delete(uri)
         return response.json()
+    
+    
+    # arg:
+    # return:
+    def reactivate_agent(self, agent_id):
+        uri = self.root_uri + '/agents/' + str(agent_id) + '/reactivate'
+        response = self._put(uri,None)
+        return response.json()['agent']
+    
+    
+    # arg:
+    # return:
+    def agent2requester(self, agent_id):
+        uri = self.root_uri + '/agents/' + str(agent_id) + '/convert_to_requester'
+        response = self._put(uri,None)
+        return response.json()['requester']
+    
+    
+    # arg:
+    # return:
+    def agent_fields(self):
+        uri = self.root_uri + '/agent_fields'
+        response = self._get(uri)
+        return response.json()['agent_fields']
+
 
 
     #------------------- Requester Group Calls -------------------#
@@ -356,8 +413,7 @@ class FreshPy(object):
                 print(response)
 
 
-    # NOT TESTED NEEDS TO BE REWORKED
-    # needs to match email for google synced requesters to Chromebook last sign in email
+    # match email for google synced requesters to Chromebook last sign in email
     # last_login_by field needs to be updated if run on different freshservice domain
     def lastUser2usedBy_students(self, asset, requester_list):
         asset_id = asset['display_id']
