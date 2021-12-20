@@ -39,7 +39,8 @@ class FreshPy(object):
             'Accept':'application/json'
         }
         response = requests.post(uri, headers=headers, auth=(self.key,''), json=data)
-        if(response.status_code!=200): exit(str(response.status_code) + " Error")
+        if(response.status_code!=200 and response.status_code!=201):
+            exit(str(response.status_code) + " Error")
         return response
 
 
@@ -51,20 +52,18 @@ class FreshPy(object):
             'Accept':'application/json'
         }
         response = requests.put(uri, headers=headers, auth=(self.key,''), json=data)
-        if((response.status_code==200) or (response.status_code==204)):
-            return response
-        else:
+        if(response.status_code!=200 and response.status_code!=204):
             exit(str(response.status_code) + " Error")
+        return response
 
 
     # arg: API URI
     # return: requests.response object
     def _delete(self, uri):
         response = requests.delete(uri, auth=(self.key,''))
-        if((response.status_code==200) or (response.status_code==204)):
-            return response
-        else:
+        if(response.status_code!=200 and response.status_code!=204):
             exit(str(response.status_code) + " Error")
+        return response
 
 
     #------------------- Pagination -------------------#
@@ -126,11 +125,10 @@ class FreshPy(object):
 
     # arg:
     # return:
-    # test response; does json error out
     def delete_ticket(self, ticket_id):
         uri = self.root_uri + '/tickets/' + str(ticket_id)
         response = self._delete(uri)
-        return response.json()
+        return "Successfully deleted ticket: {}".format(ticket_id)
 
 
     #------------------- Requester Calls -------------------#
@@ -185,27 +183,25 @@ class FreshPy(object):
 
     # arg:
     # return:
-    # test return .json()
     def deactivate_requester(self, requester_id):
         uri = self.root_uri + '/requesters/' + str(requester_id)
-        response = self._delete(uri, data)
-        return response.json()
+        response = self._delete(uri)
+        return "Successfully deactivated requester: {}".format(requester_id)
 
 
     # arg:
     # return:
-    # test return .json()
-    def forget_requester(self, requester_id):
+    def delete_requester(self, requester_id):
         uri = self.root_uri + '/requesters/' + str(requester_id) + '/forget'
-        response = self._delete(uri, data)
-        return response.json()
+        response = self._delete(uri)
+        return "Successfully deleted requester: {}".format(requester_id)
     
     
     # arg:
     # return:
     def requester2agent(self,requester_id):
         uri = self.root_uri + '/requesters/' + str(requester_id) + '/convert_to_agent'
-        response = self._put(uri,None)
+        response = self._put(uri, None)
         return response.json()['agent']
     
     
@@ -272,7 +268,7 @@ class FreshPy(object):
     def deactivate_agent(self, agent_id):
         uri = self.root_uri + '/agents/' + str(agent_id)
         response = self._delete(uri)
-        return response.json()
+        return "Successfully deactivated agent: {}".format(agent_id)
     
     
     # arg:
@@ -280,7 +276,7 @@ class FreshPy(object):
     def forget_agent(self, agent_id):
         uri = self.root_uri + '/agents/' + str(agent_id) + '/forget'
         response = self._delete(uri)
-        return response.json()
+        return "Successfully deleted agent: {}".format(agent_id)
     
     
     # arg:
@@ -363,7 +359,7 @@ class FreshPy(object):
     def delete_agent_group(self, group_id):
         uri = self.root_uri + '/groups/' + str(group_id)
         response = self._delete(uri)
-        return response.json()
+        return "Successfully deleted agent group: {}".format(group_id)
 
 
     #------------------- Requester Group Calls -------------------#
@@ -470,7 +466,7 @@ class FreshPy(object):
     def delete_vendor(self, vendor_id):
         uri = self.root_uri + '/vendors/' + str(vendor_id)
         response = self._delete(uri)
-        return response.json()
+        return "Successfully deleted vendor: " + 
 
 
     #------------------- Asset Calls -------------------#
@@ -508,7 +504,7 @@ class FreshPy(object):
     def update_asset(self, display_id, data):
         uri = self.root_uri + '/assets/' + str(display_id)
         response = self._put(uri, data)
-        return response.json()
+        return response.json()['asset']
 
 
     # arg:
