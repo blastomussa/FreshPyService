@@ -307,6 +307,24 @@ class FreshPy(object):
         return response.json()['agent_fields']
     
     
+    #------------------- Agent Role Calls -------------------#
+    # arg:
+    # return:
+    def (self, role_id):
+        uri = self.root_uri + '/roles/' + str(role_id)
+        response = self._get(uri)
+        return response.json()['role']
+
+
+    # arg:
+    # return:
+    def all_roles(self):
+        uri = self.root_uri + '/roles'
+        response = self._get(uri)
+        return response.json()['roles']
+
+    
+    
     #------------------- Agent Group Calls -------------------#
     # arg:
     # return:
