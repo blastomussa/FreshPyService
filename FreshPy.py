@@ -305,7 +305,47 @@ class FreshPy(object):
         uri = self.root_uri + '/agent_fields'
         response = self._get(uri)
         return response.json()['agent_fields']
+    
+    
+    #------------------- Agent Group Calls -------------------#
+    # arg:
+    # return:
+    def create_agent_group(self, group_json):
+        uri = self.root_uri + '/groups'
+        response = self._post(uri, group_json)
+        return response.json()['group']
 
+
+    # arg:
+    # return:
+    def view_agent_group(self, group_id):
+        uri = self.root_uri + '/groups/' + str(group_id)
+        response = self._get(uri)
+        return response.json()['group']
+
+
+    # arg:
+    # return:
+    def all_agent_groups(self):
+        uri = self.root_uri + '/groups'
+        response = self._get(uri)
+        return response.json()['groups']
+
+
+    # arg:
+    # return:
+    def update_agent_group(self, group_id, data):
+        uri = self.root_uri + '/groups/' + str(group_id)
+        response = self._put(uri, data)
+        return response.json()['group']
+
+
+    # arg:
+    # return:
+    def delete_agent_group(self, group_id):
+        uri = self.root_uri + '/groups/' + str(group_id)
+        response = self._delete(uri)
+        return response.json()
 
 
     #------------------- Requester Group Calls -------------------#
