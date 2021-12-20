@@ -390,6 +390,47 @@ class FreshPy(object):
             requesters = requesters + r
             next_page = self._paginate(response)
         return requesters
+    
+    
+    #------------------- Product Calls -------------------#
+    # arg:
+    # return:
+    def create_product(self, data):
+        uri = self.root_uri + '/products'
+        response = self._post(uri, data)
+        return response.json()['product']
+
+
+    # arg:
+    # return:
+    def view_product(self, product_id):
+        uri = self.root_uri + '/products/' + str(product_id)
+        response = self._get(uri)
+        return response.json()['product']
+
+
+    # arg:
+    # return:
+    def all_products(self):
+        uri = self.root_uri + '/products'
+        response = self._get(uri)
+        return response.json()['products']
+
+
+    # arg:
+    # return:
+    def update_products(self, product_id, data):
+        uri = self.root_uri + '/products/' + str(product_id)
+        response = self._put(uri, data)
+        return response.json()['product']
+
+
+    # arg:
+    # return:
+    def delete_product(self, product_id):
+        uri = self.root_uri + '/products/' + str(product_id)
+        response = self._delete(uri)
+        return response.json()
 
 
     #------------------- Asset Calls -------------------#
