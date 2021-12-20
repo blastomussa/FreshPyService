@@ -431,6 +431,46 @@ class FreshPy(object):
         uri = self.root_uri + '/products/' + str(product_id)
         response = self._delete(uri)
         return response.json()
+    
+    
+    #------------------- Vendor Calls -------------------#
+    # arg:
+    # return:
+    def create_vendor(self, data):
+        uri = self.root_uri + '/vendors'
+        response = self._post(uri, data)
+        return response.json()['vendor']
+
+    # arg:
+    # return:
+    def view_vendor(self, vendor_id):
+        uri = self.root_uri + '/vendors/' + str(vendor_id)
+        response = self._get(uri)
+        return response.json()['vendor']
+
+
+    # arg:
+    # return:
+    def all_vendors(self):
+        uri = self.root_uri + '/vendors'
+        response = self._get(uri)
+        return response.json()['vendors']
+
+
+    # arg:
+    # return:
+    def update_vendor(self, vendor_id, data):
+        uri = self.root_uri + '/vendors/' + str(vendor_id)
+        response = self._put(uri, data)
+        return response.json()['vendor']
+
+
+    # arg:
+    # return:
+    def delete_vendor(self, vendor_id):
+        uri = self.root_uri + '/vendors/' + str(vendor_id)
+        response = self._delete(uri)
+        return response.json()
 
 
     #------------------- Asset Calls -------------------#
