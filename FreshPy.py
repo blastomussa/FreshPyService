@@ -388,6 +388,15 @@ class FreshPy(object):
         return requesters
     
     
+    # arg:
+    # return:
+    def add_groupMember(self, group_id, requester_id):
+        uri = self.root_uri+ '/requester_groups/'+ str(group_id) +'/members/' + str(requester_id)
+        response = self._post(uri, None)
+        return "Successfully added requester: {0} to group: {1}".format(requester_id, group_id)
+
+    
+    
     #------------------- Product Calls -------------------#
     # arg:
     # return:
