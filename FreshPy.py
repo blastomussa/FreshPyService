@@ -426,7 +426,7 @@ class FreshPy(object):
     def delete_product(self, product_id):
         uri = self.root_uri + '/products/' + str(product_id)
         response = self._delete(uri)
-        return response.json()
+        return "Successfully deleted product: {}".format(product_id)
     
     
     #------------------- Vendor Calls -------------------#
@@ -466,7 +466,7 @@ class FreshPy(object):
     def delete_vendor(self, vendor_id):
         uri = self.root_uri + '/vendors/' + str(vendor_id)
         response = self._delete(uri)
-        return "Successfully deleted vendor: " + 
+        return "Successfully deleted vendor: {}".format(vendor_id)
 
 
     #------------------- Asset Calls -------------------#
@@ -512,7 +512,7 @@ class FreshPy(object):
     def delete_asset(self, display_id):
         uri = self.root_uri + '/assets/' + str(display_id)
         response = self._delete(uri)
-        return "Successfully deleted asset: " + str(display_id)
+        return "Successfully deleted asset {}".format(display_id)
 
 
     # arg:
@@ -520,7 +520,7 @@ class FreshPy(object):
     def perm_delete_asset(self, display_id):
         uri = self.root_uri + '/assets/' + str(display_id) + "/delete_forever"
         response = self._put(uri, None)
-        return "Permanently deleted asset: " + str(display_id)
+        return "Permanently deleted asset {}".format(display_id)
 
 
     #------------------- Asset Type Calls -------------------#
