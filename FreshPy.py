@@ -320,7 +320,6 @@ class FreshPy(object):
         return response.json()['roles']
 
     
-    
     #------------------- Agent Group Calls -------------------#
     # arg:
     # return:
@@ -363,12 +362,58 @@ class FreshPy(object):
 
 
     #------------------- Requester Group Calls -------------------#
+    # arg:
+    # return:
+    def create_requester_group(self, data):
+        uri = self.root_uri + '/requester_groups'
+        response = self._post(uri, data)
+        return response.json()['requester_group']
+
+    # arg:
+    # return:
+    def view_requester_group(self, group_id):
+        uri = self.root_uri + '/requester_groups/' + str(group_id)
+        response = self._get(uri)
+        return response.json()['requester_group']
+
+
     # optional arg: per page(integer 1-100)
     # return: requester group json
     def all_requester_groups(self, per_page=100):
         uri = self.root_uri + '/requester_groups?per_page=' + str(per_page)
         response = self._get(uri)
         return response.json()
+
+    # arg:
+    # return:
+    def update_requester_group(self, group_id, data):
+        uri = self.root_uri + '/requester_groups/' + str(group_id)
+        response = self._put(uri, data)
+        return response.json()['requester_group']
+
+
+    # arg:
+    # return:
+    def delete_requester_group(self, group_id):
+        uri = self.root_uri + '/requester_groups/' + str(group_id)
+        response = self._delete(uri)
+        return "Successfully deleted requester_group: {}".format(group_id)
+    
+    
+    # arg:
+    # return:
+    def add_group_member(self, group_id, requester_id):
+        uri = self.root_uri+ '/requester_groups/'+ str(group_id) +'/members/' + str(requester_id)
+        response = self._post(uri, None)
+        return "Successfully added requester: {0} to group: {1}".format(requester_id, group_id)
+    
+    
+    # arg:
+    # return:
+    def delete_group_member(self, group_id, requester_id):
+        uri = self.root_uri + '/requester_groups/' + str(group_id) + '/members/' + str(requester_id)
+        response = self._delete(uri)
+        return "Successfully removed requester: {0} from requester_group: {1}".format(group_id,requester_id)
 
 
     # arg: group id(integer)
@@ -386,16 +431,7 @@ class FreshPy(object):
             requesters = requesters + r
             next_page = self._paginate(response)
         return requesters
-    
-    
-    # arg:
-    # return:
-    def add_groupMember(self, group_id, requester_id):
-        uri = self.root_uri+ '/requester_groups/'+ str(group_id) +'/members/' + str(requester_id)
-        response = self._post(uri, None)
-        return "Successfully added requester: {0} to group: {1}".format(requester_id, group_id)
-
-    
+        
     
     #------------------- Product Calls -------------------#
     # arg:
