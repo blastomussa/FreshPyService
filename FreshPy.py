@@ -571,10 +571,42 @@ class FreshPy(object):
     #------------------- Asset Type Calls -------------------#
     # arg:
     # return:
+    def create_asset_type(self, data):
+        uri = self.root_uri + '/asset_types'
+        response = self._post(uri, data)
+        return response.json()['asset_type']
+    
+    
+    # arg:
+    # return:
+    def view_asset_type(self, id):
+        uri = self.root_uri + '/asset_types/' + str(id)
+        response = self._get(uri)
+        return response.json()['asset_type']
+
+    
+    # arg:
+    # return:
     def list_asset_types(self):
         uri = self.root_uri + '/asset_types?per_page=100'
         response = self._get(uri)
         return response.json()['asset_types']
+    
+    
+    # arg:
+    # return:
+    def update_asset_type(self, id, data):
+        uri = self.root_uri + '/asset_types/' + str(id)
+        response = self._put(uri, data)
+        return response.json()['asset_type']
+    
+    
+    # arg:
+    # return:
+    def delete_asset_type(self, id):
+        uri = self.root_uri + '/asset_types/' + str(id)
+        response = self._delete(uri)
+        return "Successfully deleted asset type: {}".format(id)
 
 
     #------------------- Author Specific Functions -------------------#
