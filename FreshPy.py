@@ -12,7 +12,7 @@ from time import sleep
 # Add intuituve pagination handling
 # Error handling for bad uri's, dead connection, failed auth, api rate, bad jsons
 
-class FreshPy(object):
+class FreshPy():
     """
         Takes api key and custom domain of freshservice instance as arguments
     """
