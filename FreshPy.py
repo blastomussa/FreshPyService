@@ -607,6 +607,47 @@ class FreshPy():
         uri = self.root_uri + '/asset_types/' + str(id)
         response = self._delete(uri)
         return "Successfully deleted asset type: {}".format(id)
+    
+    
+    #------------------- Department Calls -------------------#
+    # arg:
+    # return:
+    def create_department(self, data):
+        uri = self.root_uri + '/departments'
+        response = self._post(uri, data)
+        return response.json()['department']
+    
+
+    # arg:
+    # return:
+    def view_department(self, id):
+        uri = self.root_uri + '/departments/' + str(id)
+        response = self._get(uri)
+        return response.json()['department']
+    
+
+    # arg:
+    # return:
+    def all_departments(self):
+        uri = self.root_uri + '/departments'
+        response = self._get(uri)
+        return response.json()['departments']
+    
+
+    # arg:
+    # return:
+    def update_department(self, id, data):
+        uri = self.root_uri + '/departments/' + str(id)
+        response = self._put(uri, data)
+        return response.json()['department']
+    
+
+    # arg:
+    # return:
+    def delete_department(self, id):
+        uri = self.root_uri + '/departments/' + str(id)
+        response = self._delete(uri)
+        return "Successfully deleted department: {}".format(id)
 
 
     #------------------- Author Specific Functions -------------------#
