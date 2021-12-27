@@ -648,6 +648,47 @@ class FreshPy():
         uri = self.root_uri + '/departments/' + str(id)
         response = self._delete(uri)
         return "Successfully deleted department: {}".format(id)
+    
+    
+    #------------------- Solution Category Calls -------------------#
+    # arg:
+    # return:
+    def create_solution_category(self, data):
+        uri = self.root_uri + '/solutions​/categories'
+        response = self._post(uri, data)
+        return response.json()['category']
+
+
+    # arg:
+    # return:
+    def view_solution_category(self, id):
+        uri = self.root_uri + '/solutions​/categories/' + str(id)
+        response = self._get(uri)
+        return response.json()['category']
+
+
+    # arg:
+    # return:
+    def all_solution_categories(self):
+        uri = self.root_uri + '/solutions​/categories'
+        response = self._get(uri)
+        return response.json()['categories']
+
+
+    # arg:
+    # return:
+    def update_solution_category(self, id, data):
+        uri = self.root_uri + '/solutions​/categories/' + str(id)
+        response = self._put(uri, data)
+        return response.json()['category']
+
+
+    # arg:
+    # return:
+    def delete_solution_category(self, id):
+        uri = self.root_uri + '/solutions​/categories/' + str(id)
+        response = self._delete(uri)
+        return "Successfully deleted solution category: {}".format(id)
 
 
     #------------------- Author Specific Functions -------------------#
