@@ -689,6 +689,47 @@ class FreshPy():
         uri = self.root_uri + '/solutions​/categories/' + str(id)
         response = self._delete(uri)
         return "Successfully deleted solution category: {}".format(id)
+    
+    
+    #------------------- Solution Folder Calls -------------------#
+    # arg:
+    # return:
+    def create_solution_folder(self, data):
+        uri = self.root_uri + '/solutions/folders'
+        response = self._post(uri, data)
+        return response.json()['folder']
+
+
+    # arg:
+    # return:
+    def view_solution_folder(self, id):
+        uri = self.root_uri + '/solutions/folders/' + str(id)
+        response = self._get(uri)
+        return response.json()['folder']
+
+
+    # arg:
+    # return:
+    def all_solution_folder(self):
+        uri = self.root_uri + '/solutions/folders'
+        response = self._get(uri)
+        return response.json()['folders']
+
+
+    # arg:
+    # return:
+    def update_solution_folder(self, id, data):
+        uri = self.root_uri + '/solutions/folders/' + str(id)
+        response = self._put(uri, data)
+        return response.json()['folder']
+
+
+    # arg:
+    # return:
+    def delete_solution_folder(self, id):
+        uri = self.root_uri + '/solutions/folders/' + str(id)
+        response = self._delete(uri)
+        return "Successfully deleted Solution Folder: {}".format(id)
 
 
     #------------------- Author Specific Functions -------------------#
