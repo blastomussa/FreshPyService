@@ -730,6 +730,47 @@ class FreshPy():
         uri = self.root_uri + '/solutions/folders/' + str(id)
         response = self._delete(uri)
         return "Successfully deleted Solution Folder: {}".format(id)
+    
+    
+    #------------------- Canned Response Calls -------------------#
+    # arg:
+    # return:
+    def all_canned_response_folders(self):
+        uri = self.root_uri + '/canned_response_folders'
+        response = self._get(uri)
+        return response.json()['canned_response_folders']
+
+
+    # arg:
+    # return:
+    def view_canned_response_folder(self, id):
+        uri = self.root_uri + '/canned_response_folders/' + str(id)
+        response = self._get(uri)
+        return response.json()['canned response_folder']
+
+
+    # arg:
+    # return:
+    def all_canned_responses_in_folder(self, id):
+        uri = self.root_uri + '/canned_response_folders/' + str(id) + '/canned_responses'
+        response = self._get(uri)
+        return response.json()['canned_responses']
+
+
+    # arg:
+    # return:
+    def all_canned_responses(self):
+        uri = self.root_uri + '/canned_responses'
+        response = self._get(uri)
+        return response.json()['canned_responses']
+
+
+    # arg:
+    # return:
+    def view_canned_response(self, id):
+        uri = self.root_uri + '/canned_responses/' + str(id)
+        response = self._get(uri)
+        return response.json()['']
 
 
     #------------------- Author Specific Functions -------------------#
